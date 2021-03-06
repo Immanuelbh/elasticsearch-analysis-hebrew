@@ -93,6 +93,7 @@ public final class HebrewAnalysisPlugin extends Plugin implements ActionPlugin, 
      * If hebrew.dict.path is defined, try loading that first.
      *
      * @param settings settings
+     * @param configPath path
      */
     public HebrewAnalysisPlugin(final Settings settings, final Path configPath) {
         super();
@@ -187,7 +188,7 @@ public final class HebrewAnalysisPlugin extends Plugin implements ActionPlugin, 
                                              SettingsFilter settingsFilter,
                                              IndexNameExpressionResolver indexNameExpressionResolver,
                                              Supplier<DiscoveryNodes> nodesInCluster) {
-        return singletonList(new RestHebrewAnalyzerCheckWordAction(restController));
+        return singletonList(new RestHebrewAnalyzerCheckWordAction());
     }
 
     @Override

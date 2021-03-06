@@ -5,5 +5,7 @@ releases/
 build/
 .gradle/
 hspell-data-files/
+packaging/
 gradle.properties
 *.iml
+*.sha1

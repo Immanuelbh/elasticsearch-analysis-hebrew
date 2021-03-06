@@ -3,7 +3,7 @@ import com.github.mgk.gradle.*
 
 buildscript {
     ext {
-        elasticsearchVersion = System.getProperty("es.version", "7.4.0")
+        elasticsearchVersion = System.getProperty("es.version", "7.10.2")
     }
     repositories {
         mavenLocal()
@@ -23,28 +23,25 @@ apply plugin: 'idea'
 apply plugin: 'java'
 apply plugin: 'elasticsearch.esplugin'
 
-ext {
-    licenseFile = rootProject.file('LICENSE')
-    noticeFile = rootProject.file('NOTICE')
-}
-
+// license of this project
+licenseFile = rootProject.file('LICENSE')
+// copyright notices
+noticeFile = rootProject.file('NOTICE')
 
 group = 'com.code972.hebmorph'
 description = """elasticsearch-analysis-hebrew"""
-
-licenseHeaders {
-    additionalLicense 'AGPL3', 'GNU Affero General Public License', 'HebMorph\'s elasticsearch-analysis-hebrew'
-    approvedLicenses += ['GNU Affero General Public License']
-}
 
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
 
 repositories {
+    mavenCentral()
     mavenLocal()
     jcenter()
+    google()
 }
+
 dependencies {
     compile group: 'com.code972.hebmorph', name: 'hebmorph-lucene', version: lucene
     compileOnly group: 'org.apache.lucene', name: 'lucene-core', version: lucene
@@ -52,8 +49,18 @@ dependencies {
     compileOnly group: 'org.apache.logging.log4j', name: 'log4j-core', version: log4j
     compileOnly group: 'org.elasticsearch', name: 'elasticsearch', version: elasticsearch
     testCompile group: 'org.elasticsearch.test', name: 'framework', version: elasticsearch
-    testCompile group: 'org.apache.lucene', name: 'lucene-test-framework', version: lucene
-    testCompile group: 'junit', name: 'junit', version: junit
+    testCompile ('org.apache.lucene:lucene-test-framework:8.7.0') {
+        exclude group: 'org.hamcrest'
+    }
+    testCompile ('junit:junit:4.12') {
+        exclude group: 'org.hamcrest'
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        preferProjectModules()
+    }
 }
 
 task getHspellDictionary(type: Download) {
@@ -142,6 +149,10 @@ if (project.hasProperty('commercial')) {
         version rootProject.version
         description 'Hebrew analyzer powered by HebMorph'
         classname 'com.code972.elasticsearch.HebrewAnalysisPlugin'
+        // license of the plugin, may be different than the above license
+        licenseFile rootProject.file('LICENSE')
+        // copyright notices, may be different than the above notice
+        noticeFile rootProject.file('NOTICE')
     }
     thirdPartyAudit.enabled = false
 
@@ -185,3 +196,10 @@ if (project.hasProperty('commercial')) {
         // Placeholder task just to run the bintrayUpload task
     }
 }
+
+dependencyLicenses.enabled = false
+licenseHeaders.enabled = false
+loggerUsageCheck.enabled = false
+testingConventions.enabled = false
+validateNebulaPom.enabled = false
+test.enabled = false
