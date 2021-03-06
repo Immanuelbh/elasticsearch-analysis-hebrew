@@ -145,6 +145,8 @@ Build the plugin:
 gradle task build
 ```
 
+** Note the build creates analysis-hebrew jar file. Not elasticsearch-analysis-hebrew.zip, which is built manually.
+
 ## License
 
 AGPL3, see LICENSE
