@@ -2,14 +2,14 @@
 
 Originally powered by HebMorph (https://github.com/synhershko/HebMorph) and licensed under the AGPL3, currently using this [fork](https://github.com/Immanuelbh/HebMorph) for latest version updates.
 
-[![Download](https://img.shields.io/badge/Download-7.10.2-blue) ](https://github.com/Immanuelbh/plugin-test-release/releases/download/v7.10.2/elasticsearch-analysis-hebrew-7.10.2.zip)
+[![Download](https://img.shields.io/badge/Download-7.10.2-blue) ](https://github.com/Immanuelbh/elasticsearch-analysis-hebrew/releases/download/elasticsearch-analysis-hebrew-7.10.2/elasticsearch-analysis-hebrew-7.10.2.zip)
 
 ## Installation
 
 First, install the plugin by invoking the command which fits your elasticsearch version (older versions can be found at the bottom):
 
 ```shell
-./bin/elasticsearch-plugin install --batch https://github.com/Immanuelbh/plugin-test-release/releases/download/v7.10.2/elasticsearch-analysis-hebrew-7.10.2.zip
+./bin/elasticsearch-plugin install --batch https://github.com/Immanuelbh/elasticsearch-analysis-hebrew/releases/download/elasticsearch-analysis-hebrew-7.10.2/elasticsearch-analysis-hebrew-7.10.2.zip
 ```
 
 ### Earlier versions
@@ -135,14 +135,14 @@ Even older versions:
 ## Development
 Get the matching version.properties file from Elasticsearch:
 ```shell
-$ curl https://raw.githubusercontent.com/elastic/elasticsearch/7.10/buildSrc/version.properties -O version.properties
+curl https://raw.githubusercontent.com/elastic/elasticsearch/7.10/buildSrc/version.properties -O version.properties
 ```
 
 ** Notice for this version (7.10.2) you should downgrade from 7.10.3 => 7.10.2 
 
 Build the plugin:
 ```shell
-$ gradle task build
+gradle task build
 ```
 
 ## License
